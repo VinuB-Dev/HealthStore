@@ -18,7 +18,7 @@ export default function Home() {
       <div className="grid">
         {filteredData.slice(0, 5).map((product) => {
           return (
-            <Link to="/products" key={product.id} className="card2">
+            <Link to="/products" key={product._id} className="card2">
               <div className="card-img2">
                 <img src={product.imageURL} alt="" />
               </div>
