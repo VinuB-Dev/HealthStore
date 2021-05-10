@@ -1,0 +1,55 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  column-gap: 1rem;
+  row-gap: 0rem;
+  place-items: center;
+}
+
+@media screen and (max-width: 1450px) and (min-width: 1150px) {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 0rem;
+    place-items: center;
+  }
+}
+
+@media screen and (max-width: 1150px) and (min-width: 740px) {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    row-gap: 0rem;
+    place-items: center;
+  }
+}
+
+@media screen and (max-width: 740px) {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: 1rem;
+    row-gap: 0rem;
+    place-items: center;
+  }
+}
+
+.filter-space {
+  margin: 2rem;
+}
+
+.parallax {
+  background-image: url("https://images.unsplash.com/photo-1620497772559-b65fc1d1ccf7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80");
+  height: 100vh;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}

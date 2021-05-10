@@ -1,0 +1,255 @@
+.Cart {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.card {
+  grid-area: products;
+  align-content: center;
+  display: flex;
+  flex-direction: row;
+  width: 40rem;
+  height: fit-content;
+  background: #ffffff;
+  color: black;
+  padding: 0.5rem;
+  border: 1px solid;
+  text-align: center;
+  margin: auto;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 640px) {
+  .card {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    max-width: fit-content;
+    max-height: 20rem;
+    background: #ffffff;
+    color: black;
+    padding: 0.5rem;
+    border: 1px solid;
+  }
+}
+
+.card-img {
+  max-width: 20rem;
+  max-height: 20rem;
+  height: auto;
+  margin: 0rem;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 640px) {
+  .card-img {
+    max-width: 15rem;
+    max-height: 15rem;
+    height: 12rem;
+    margin: 0rem;
+    overflow: hidden;
+  }
+}
+
+.card:hover {
+  box-shadow: 0 25px 25px 0 rgba(5, 5, 5, 0.4);
+}
+
+@media screen and (max-width: 640px) {
+  .card:hover {
+    box-shadow: 0 15px 25px 0 rgba(5, 5, 5, 0.4);
+  }
+}
+
+.card-desc {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  max-width: 15rem;
+  max-height: 20rem;
+}
+
+@media screen and (max-width: 640px) {
+  .card-desc {
+    padding: 1rem 0rem;
+    max-width: 15rem;
+    max-height: 20rem;
+  }
+}
+
+.title_cart {
+  font-weight: bold;
+  font-size: larger;
+}
+
+@media screen and (max-width: 640px) {
+  .title_cart {
+    font-weight: bold;
+    font-size: medium;
+  }
+}
+
+.product-desc1 {
+  padding-top: 0.5rem;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  color: #787a81;
+}
+
+@media screen and (max-width: 445px) {
+  .product-desc1 {
+    display: none;
+  }
+}
+
+.bold {
+  font-weight: bold;
+}
+
+@media screen and (max-width: 640px) {
+  .bold {
+    font-weight: bold;
+    font-size: small;
+  }
+}
+
+.actual-price {
+  color: #787a81;
+  text-decoration: line-through;
+  margin-left: 0.5rem;
+}
+
+@media screen and (max-width: 640px) {
+  .actual-price {
+    color: #787a81;
+    text-decoration: line-through;
+    margin-left: 0.5rem;
+    font-size: small;
+  }
+}
+
+.cart_btn-yellow {
+  margin: 1rem;
+  background-color: rgb(194, 194, 51);
+  min-width: fit-content;
+  border-radius: 3rem;
+  padding: 1rem 1rem;
+  border: none;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 640px) {
+  .cart_btn-yellow {
+    margin: 1rem;
+    background-color: rgb(194, 194, 51);
+    min-width: fit-content;
+    border-radius: 3rem;
+    padding: 1rem 1rem;
+    border: none;
+    font-weight: bold;
+  }
+}
+
+.cart_btn-yellow:hover {
+  cursor: pointer;
+  background-color: #d1a701;
+  box-shadow: 0px 8px 15px rgba(0, 0, 1, 0.1);
+}
+
+.price-flex1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.button-flex {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.making-grids {
+  margin-left: 8rem;
+  display: grid;
+  grid-template: "products products checkout";
+  grid-column-gap: 1rem;
+}
+
+.allItems {
+  border: 0.2px solid rgb(170, 165, 165);
+  padding: 0.2rem;
+  width: fit;
+}
+
+@media (max-width: 640px) {
+  .making-grids {
+    display: block;
+    margin-left: 0;
+  }
+  .allItems {
+    border: 0.2px solid rgb(170, 165, 165);
+    padding: 0.2rem;
+    width: fit;
+  }
+}
+
+.CartCard {
+  grid-area: checkout;
+  width: 91%;
+  text-align: left;
+  margin: auto;
+  margin-top: 1rem;
+  padding: 1rem;
+  color: black;
+}
+
+.card-heading {
+  padding: 0.5rem 0;
+  color: rgb(99, 95, 95);
+}
+
+.card-split {
+  display: flex;
+  justify-content: space-between;
+  line-height: 25px;
+}
+
+.final {
+  font-weight: bold;
+  color: black;
+}
+
+@media screen and (max-width: 640px) {
+  .CartCard {
+    width: 91%;
+    text-align: left;
+    margin: auto;
+    margin-top: 1rem;
+    padding: 1rem;
+    color: black(214, 185, 185);
+  }
+
+  .card-heading {
+    padding: 0.5rem 0;
+    color: rgb(172, 166, 166);
+  }
+
+  .card-split {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .final {
+    font-weight: bold;
+    color: black;
+  }
+}
