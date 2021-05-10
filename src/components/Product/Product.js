@@ -7,7 +7,7 @@ export default function Product(value) {
   const { addToWishList, addToCart } = useCart();
   return value.value.map((product) => {
     return (
-      <div key={product.id} className="card2">
+      <div key={product._id} className="card2">
         <div className="card-img2">
           <img src={product.imageURL} alt="" />
         </div>

@@ -12,7 +12,7 @@ const ShowItem = () => {
   } = useCart();
   return wishListItems.map((product) => {
     return (
-      <div key={product.id} className="card2">
+      <div key={product._id} className="card2">
         <div>
           <img className="card-img2" src={product.imageURL} alt="" />
         </div>
