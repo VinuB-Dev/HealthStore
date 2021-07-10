@@ -2,17 +2,69 @@ import "../Product/Product_module.css";
 import "../../styles.css";
 import { FiShoppingCart } from "react-icons/fi";
 import { RiDeleteBin3Fill } from "react-icons/ri";
-import { useCart } from "../../context/dataContext";
+import { useUser } from "../../context/user/userContext";
 import { Link } from "react-router-dom";
-
+import { isWishlisted } from "../../Utils";
+import {
+  incrementQuantity,
+  cartAdd,
+  wishlistRemove
+} from "../../Services/user.service";
 const ShowItem = () => {
   const {
-    state: { wishListItems },
-    dispatch
-  } = useCart();
-  return wishListItems.map((product) => {
+    userState: { wishlist, cart },
+    userDispatch
+  } = useUser();
+
+  const moveToCart = async (product) => {
+    let promise;
+    isWishlisted(product, cart)
+      ? (promise = incrementQuantity(product._id))
+      : (promise = cartAdd(product._id));
+
+    isWishlisted(product, cart)
+      ? userDispatch({
+          type: "INCREASE_QUANTITY",
+          payload: product
+        })
+      : userDispatch({
+          type: "ADD_ITEM_TO_CART",
+          payload: product
+        });
+
+    const response = await promise;
+    const response2 = await wishlistRemove(product._id);
+    if (!response.success && !response2.success) {
+      userDispatch({
+        type: "REMOVE_ITEM_FROM_CART",
+        payload: product
+      });
+      userDispatch({
+        type: "ADD_ITEM_TO_WISHLIST",
+        payload: product
+      });
+    }
+  };
+
+  const removeFromWishlist = async (product) => {
+    userDispatch({
+      type: "REMOVE_ITEM_FROM_WISHLIST",
+      payload: product
+    });
+    let promise = wishlistRemove(product._id);
+    const response = await promise;
+
+    if (!response.success) {
+      userDispatch({
+        type: "ADD_ITEM_TO_WISHLIST",
+        payload: product
+      });
+    }
+  };
+
+  return wishlist.map((product) => {
     return (
-      <div key={product._id} className="card2">
+      <div key={product.id} className="card2">
         <div>
           <img className="card-img2" src={product.imageURL} alt="" />
         </div>
@@ -25,17 +77,13 @@ const ShowItem = () => {
           <span className="product-desc2">{product.description} </span>
           <button
             className="product-desc primary_btn-yellow"
-            onClick={() =>
-              dispatch({ type: "ADD_ITEM_TO_CART", payload: product })
-            }
+            onClick={() => moveToCart(product)}
           >
             Move to Cart <FiShoppingCart />
           </button>
           <button
             className="primary_btn-yellow product-desc"
-            onClick={() =>
-              dispatch({ type: "REMOVE_ITEM_FROM_WISHLIST", payload: product })
-            }
+            onClick={() => removeFromWishlist(product)}
           >
             <RiDeleteBin3Fill />
           </button>
@@ -47,21 +95,21 @@ const ShowItem = () => {
 
 export default function WishList() {
   const {
-    state: { wishListItems }
-  } = useCart();
+    userState: { wishlist }
+  } = useUser();
   return (
     <div>
-      {wishListItems.length > 0 && (
+      {wishlist.length > 0 && (
         <div>
           <h3 style={{ textAlign: "center", marginLeft: "3rem" }}>
-            WishList <div>{wishListItems.length} Items</div>
+            WishList <div>{wishlist.length} Items</div>
           </h3>
           <div className="grid">
             <ShowItem />
           </div>{" "}
         </div>
       )}
-      {wishListItems.length === 0 && (
+      {wishlist.length === 0 && (
         <h3 style={{ textAlign: "center", marginLeft: "3rem" }}>
           No Products in your Wishlist
           <button className="primary_btn-yellow product-desc">

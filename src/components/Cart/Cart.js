@@ -1,13 +1,49 @@
 import "./Cart_module.css";
-import { useCart } from "../../context/dataContext";
+import { useUser } from "../../context/user/userContext";
 import { Link } from "react-router-dom";
+import {
+  incrementQuantity,
+  decrementQuantity,
+  cartRemove
+} from "../../Services/user.service";
 
 const ShowItem = () => {
   const {
-    state: { cartItems },
-    dispatch
-  } = useCart();
-  return cartItems.map((product) => {
+    userState: { cart },
+    userDispatch
+  } = useUser();
+
+  const increaseQuantity = async (product) => {
+    let promise = incrementQuantity(product._id);
+    userDispatch({ type: "INCREASE_QUANTITY", payload: product });
+    let response = await promise;
+    if (!response.success) {
+      userDispatch({ type: "DECREASE_QUANTITY", payload: product });
+    }
+  };
+
+  const decreaseQuantity = async (product) => {
+    let promise = decrementQuantity(product._id);
+    userDispatch({ type: "DECREASE_QUANTITY", payload: product });
+    let response = await promise;
+    if (!response.success) {
+      userDispatch({ type: "INCREASE_QUANTITY", payload: product });
+    }
+  };
+
+  const removeFromCart = async (product) => {
+    let promise = cartRemove(product._id);
+    userDispatch({
+      type: "REMOVE_ITEM_FROM_CART",
+      payload: product
+    });
+    let response = await promise;
+    if (!response.success) {
+      userDispatch({ type: "ADD_ITEM_TO_CART", payload: product });
+    }
+  };
+
+  return cart.map((product) => {
     return (
       <div key={product._id} className="card">
         <div>
@@ -20,11 +56,26 @@ const ShowItem = () => {
           </div>
           <span className="product-desc1">{product.description} </span>
           <div className="button-flex">
+            {product.quantityInCart > 1 && (
+              <button
+                className="cart_btn-yellow"
+                onClick={() => decreaseQuantity(product)}
+              >
+                -
+              </button>
+            )}
+            <p style={{ marginTop: "2rem" }}>{product.quantityInCart}</p>
             <button
               className="cart_btn-yellow"
-              onClick={() =>
-                dispatch({ type: "REMOVE_ITEM_FROM_CART", payload: product })
-              }
+              onClick={() => increaseQuantity(product)}
+            >
+              +
+            </button>
+          </div>
+          <div className="button-flex">
+            <button
+              className="cart_btn-yellow"
+              onClick={() => removeFromCart(product)}
             >
               Remove
             </button>
@@ -37,9 +88,9 @@ const ShowItem = () => {
 
 const CartCard = () => {
   const {
-    state: { cartItems }
-  } = useCart();
-  const { TotalPrice, FinalPrice, discount } = addCost(cartItems);
+    userState: { cart }
+  } = useUser();
+  const { TotalPrice, FinalPrice, discount } = addCost(cart);
   return (
     <div className="CartCard">
       <div className="card-heading">Price Details:</div>
@@ -62,9 +113,9 @@ const CartCard = () => {
   );
 };
 
-const addCost = (cartItems) => {
-  const TotalPrice = cartItems.reduce(
-    (count, item) => count + item.final_price * item.QuantityInCart,
+const addCost = (cart) => {
+  const TotalPrice = cart.reduce(
+    (count, item) => count + item.final_price * item.quantityInCart,
     0
   );
   const discount = TotalPrice / 10;
@@ -74,25 +125,25 @@ const addCost = (cartItems) => {
 
 export default function Cart() {
   const {
-    state: { cartItems }
-  } = useCart();
+    userState: { cart }
+  } = useUser();
 
   return (
     <div>
-      {cartItems.length > 0 && (
+      {cart.length > 0 && (
         <div>
-          <h3>Items in Cart: {cartItems.length}</h3>
+          <h3>Items in Cart: {cart.length}</h3>
           <div className="making-grids">
             <div className="allItems">
               <ShowItem />
             </div>
             <div div className="allItems">
-              <CartCard value={cartItems} />
+              <CartCard value={cart} />
             </div>
           </div>
         </div>
       )}
-      {cartItems.length === 0 && (
+      {cart.length === 0 && (
         <h3 style={{ textAlign: "center", marginLeft: "3rem" }}>
           No Products in your Cart
           <button className="primary_btn-yellow">

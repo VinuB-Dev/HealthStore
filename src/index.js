@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import ReactDOM from "react-dom";
-import { CartProvider } from "./context/dataContext";
+import { CartProvider } from "./context/data/dataContext";
+import { UserProvider } from "./context/user/userContext";
 import { BrowserRouter as Router } from "react-router-dom";
 
 import App from "./App";
@@ -10,7 +11,9 @@ ReactDOM.render(
   <StrictMode>
     <Router>
       <CartProvider>
-        <App />
+        <UserProvider>
+          <App />
+        </UserProvider>
       </CartProvider>
     </Router>
   </StrictMode>,

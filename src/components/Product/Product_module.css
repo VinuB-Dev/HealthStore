@@ -177,3 +177,7 @@ img {
   justify-content: center;
   padding: 1rem;
 }
+
+button a {
+  color: black;
+}

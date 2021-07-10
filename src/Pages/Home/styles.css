@@ -1,0 +1,54 @@
+.banner {
+  text-align: center;
+}
+
+.slogan {
+  font-weight: 1000;
+  color: #111827;
+  background-color: white;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+
+.sliding-img {
+  width: 100%;
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.img1 {
+  /* background: url(../images/sliding-img-2.jpg); */
+  background: url("https://images.unsplash.com/photo-1562438281-83c355f4aa09?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.img2 {
+  background: url("https://images.unsplash.com/photo-1485963631004-f2f00b1d6606?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTZ8fGhlYWx0aHklMjBzbmFja3xlbnwwfHwwfHw%3D&ixlib=rb-1.2.1");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.btn-img {
+  width: 25px;
+  height: 26px;
+  cursor: pointer;
+  outline: none;
+  border-radius: 50%;
+  border: none;
+  margin: 1rem;
+}
+
+.slogan-btn {
+  padding: 1rem;
+  border-radius: 3rem;
+  border: none;
+  background-color: #34d399;
+  color: black;
+  font-weight: 500;
+}

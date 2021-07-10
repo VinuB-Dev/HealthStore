@@ -44,3 +44,12 @@
 .filter-space {
   margin: 2rem;
 }
+
+.parallax {
+  background-image: url("https://images.unsplash.com/photo-1620497772559-b65fc1d1ccf7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80");
+  height: 100vh;
+  position: relative;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
