@@ -15,7 +15,7 @@ export default function Login() {
     email: '',
     password: '',
   })
-
+  const [error, setError] = useState(0)
   const { userDispatch } = useUser()
 
   const submit = async (e) => {
@@ -24,7 +24,6 @@ export default function Login() {
       email: userData['email'],
       password: userData['password'],
     })
-
     if (response.success) {
       addTokenToStorage(response.token)
       userDispatch({
@@ -35,6 +34,8 @@ export default function Login() {
         },
       })
       navigate(from || '/')
+    } else {
+      setError(1)
     }
   }
 
@@ -44,9 +45,21 @@ export default function Login() {
       [e.currentTarget.id]: JSON.parse(JSON.stringify(e.currentTarget.value)),
     })
   }
+
   return (
     <div className='auth-container'>
       <form className='auth-form' onSubmit={submit}>
+        <div>
+          {console.log(error)}
+          {error ? (
+            <div style={{ marginLeft: '2.5rem' }}>
+              <h3 style={{ color: 'red' }}>Username/Password wrong</h3>
+              <h3 style={{ color: 'green' }}>Signup if you haven't yet</h3>
+            </div>
+          ) : (
+            ''
+          )}
+        </div>
         <h3>Login</h3>
         <label>Email</label>
         <input

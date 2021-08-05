@@ -9,6 +9,7 @@ import {
   wishlistRemove,
   cartAdd,
 } from '../../Services/user.service'
+
 export default function Product(value) {
   const {
     userState: { isLoggedIn, cart, wishlist },
