@@ -69,7 +69,7 @@ export default function Home() {
       <br />
       <h1>Trending Deals</h1>
       <div className='grid'>
-        {filteredData.slice(0, 5).map((product) => {
+        {filteredData.slice(0, 4).map((product) => {
           return (
             <Link to='/products' key={product.id} className='card2'>
               <div className='card-img2'>
@@ -87,7 +87,6 @@ export default function Home() {
           )
         })}
       </div>
-      {/* more work to do here */}
     </div>
   )
 }

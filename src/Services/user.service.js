@@ -1,28 +1,29 @@
-import axios from "axios";
-import { getAuthToken } from "../Utils";
+import axios from 'axios'
+
+const token = JSON.parse(localStorage.getItem('Auth'))?.token
 
 export async function getUserData() {
   try {
     const response = await axios.get(
-      "https://HealthStore.bravesoldier.repl.co/user",
+      'https://HealthStore.bravesoldier.repl.co/user',
       {
         headers: {
-          Authorization: getAuthToken()
-        }
+          Authorization: token,
+        },
       }
-    );
-    console.log("success-getuser");
-    return response.data;
+    )
+    console.log('success-getuser')
+    return response.data
   } catch (error) {
-    console.log("fail-getuser");
+    console.log('fail-getuser')
 
     if (axios.isAxiosError(error)) {
-      const serverError = error;
+      const serverError = error
       if (serverError && serverError.response) {
         return {
           ...serverError.response.data,
-          status: serverError.response.status
-        };
+          status: serverError.response.status,
+        }
       }
     }
   }
@@ -31,25 +32,25 @@ export async function getUserData() {
 export async function wishlistAdd(productId) {
   try {
     const response = await axios.post(
-      "https://HealthStore.bravesoldier.repl.co/user/wishlistadd",
+      'https://HealthStore.bravesoldier.repl.co/user/wishlistadd',
       {
-        productId
+        productId,
       },
       {
         headers: {
-          Authorization: getAuthToken()
-        }
+          Authorization: token,
+        },
       }
-    );
-    return response.data;
+    )
+    return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const serverError = error;
+      const serverError = error
       if (serverError && serverError.response) {
         return {
           ...serverError.response.data,
-          status: serverError.response.status
-        };
+          status: serverError.response.status,
+        }
       }
     }
   }
@@ -58,25 +59,25 @@ export async function wishlistAdd(productId) {
 export async function wishlistRemove(productId) {
   try {
     const response = await axios.post(
-      "https://HealthStore.bravesoldier.repl.co/user/wishlistremove",
+      'https://HealthStore.bravesoldier.repl.co/user/wishlistremove',
       {
-        productId
+        productId,
       },
       {
         headers: {
-          Authorization: getAuthToken()
-        }
+          Authorization: token,
+        },
       }
-    );
-    return response.data;
+    )
+    return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const serverError = error;
+      const serverError = error
       if (serverError && serverError.response) {
         return {
           ...serverError.response.data,
-          status: serverError.response.status
-        };
+          status: serverError.response.status,
+        }
       }
     }
   }
@@ -85,25 +86,25 @@ export async function wishlistRemove(productId) {
 export async function cartAdd(productId) {
   try {
     const response = await axios.post(
-      "https://HealthStore.bravesoldier.repl.co/user/cartadd",
+      'https://HealthStore.bravesoldier.repl.co/user/cartadd',
       {
-        productId
+        productId,
       },
       {
         headers: {
-          Authorization: getAuthToken()
-        }
+          Authorization: token,
+        },
       }
-    );
-    return response.data;
+    )
+    return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const serverError = error;
+      const serverError = error
       if (serverError && serverError.response) {
         return {
           ...serverError.response.data,
-          status: serverError.response.status
-        };
+          status: serverError.response.status,
+        }
       }
     }
   }
@@ -112,25 +113,25 @@ export async function cartAdd(productId) {
 export async function cartRemove(productId) {
   try {
     const response = await axios.post(
-      "https://HealthStore.bravesoldier.repl.co/user/cartremove",
+      'https://HealthStore.bravesoldier.repl.co/user/cartremove',
       {
-        productId
+        productId,
       },
       {
         headers: {
-          Authorization: getAuthToken()
-        }
+          Authorization: token,
+        },
       }
-    );
-    return response.data;
+    )
+    return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const serverError = error;
+      const serverError = error
       if (serverError && serverError.response) {
         return {
           ...serverError.response.data,
-          status: serverError.response.status
-        };
+          status: serverError.response.status,
+        }
       }
     }
   }
@@ -139,25 +140,25 @@ export async function cartRemove(productId) {
 export async function incrementQuantity(productId) {
   try {
     const response = await axios.post(
-      "https://HealthStore.bravesoldier.repl.co/user/incrementQuantity",
+      'https://HealthStore.bravesoldier.repl.co/user/incrementQuantity',
       {
-        productId
+        productId,
       },
       {
         headers: {
-          Authorization: getAuthToken()
-        }
+          Authorization: token,
+        },
       }
-    );
-    return response.data;
+    )
+    return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const serverError = error;
+      const serverError = error
       if (serverError && serverError.response) {
         return {
           ...serverError.response.data,
-          status: serverError.response.status
-        };
+          status: serverError.response.status,
+        }
       }
     }
   }
@@ -166,25 +167,25 @@ export async function incrementQuantity(productId) {
 export async function decrementQuantity(productId) {
   try {
     const response = await axios.post(
-      "https://HealthStore.bravesoldier.repl.co/user/decrementQuantity",
+      'https://HealthStore.bravesoldier.repl.co/user/decrementQuantity',
       {
-        productId
+        productId,
       },
       {
         headers: {
-          Authorization: getAuthToken()
-        }
+          Authorization: token,
+        },
       }
-    );
-    return response.data;
+    )
+    return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const serverError = error;
+      const serverError = error
       if (serverError && serverError.response) {
         return {
           ...serverError.response.data,
-          status: serverError.response.status
-        };
+          status: serverError.response.status,
+        }
       }
     }
   }

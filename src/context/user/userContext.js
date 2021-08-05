@@ -1,7 +1,6 @@
 import { createContext, useContext, useReducer, useEffect } from 'react'
 import userReducer from './userReducer'
 import { getUserData } from '../../Services/user.service'
-import { isLoggedInLocaly } from '../../Utils'
 export const UserContext = createContext()
 export function useUser() {
   return useContext(UserContext)
@@ -9,7 +8,7 @@ export function useUser() {
 
 export function UserProvider({ children }) {
   const [userState, userDispatch] = useReducer(userReducer, {
-    isLoggedIn: isLoggedInLocaly(),
+    isLoggedIn: JSON.parse(localStorage.getItem('Auth'))?.isLoggedIn,
     name: '',
     wishlist: [],
     cart: [],
