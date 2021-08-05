@@ -1,48 +1,47 @@
-import { createContext, useContext, useReducer, useEffect } from "react";
-import userReducer from "./userReducer";
-import { getUserData } from "../../Services/user.service";
-import { isLoggedInLocaly } from "../../Utils";
-export const UserContext = createContext();
+import { createContext, useContext, useReducer, useEffect } from 'react'
+import userReducer from './userReducer'
+import { getUserData } from '../../Services/user.service'
+import { isLoggedInLocaly } from '../../Utils'
+export const UserContext = createContext()
 export function useUser() {
-  return useContext(UserContext);
+  return useContext(UserContext)
 }
 
 export function UserProvider({ children }) {
   const [userState, userDispatch] = useReducer(userReducer, {
     isLoggedIn: isLoggedInLocaly(),
-    name: "",
+    name: '',
     wishlist: [],
-    cart: []
-  });
+    cart: [],
+  })
 
   useEffect(() => {
-    (async function () {
+    ;(async function () {
       if (userState.isLoggedIn) {
-        const response = await getUserData();
+        const response = await getUserData()
         if (response.success) {
           userDispatch({
-            type: "UPDATE_USER_DATA",
+            type: 'UPDATE_USER_DATA',
             payload: {
-              user: response.user
-            }
-          });
-          console.log(response.user.cart);
+              user: response.user,
+            },
+          })
         } else if (response.status === 401) {
           userDispatch({
-            type: "UPDATE_USER_LOGIN",
+            type: 'UPDATE_USER_LOGIN',
             payload: {
-              isLoggedIn: false
-            }
-          });
+              isLoggedIn: false,
+            },
+          })
         }
       } else {
       }
-    })();
-  }, [userState.isLoggedIn]);
+    })()
+  }, [userState.isLoggedIn])
 
   return (
     <UserContext.Provider value={{ userState, userDispatch }}>
       {children}
     </UserContext.Provider>
-  );
+  )
 }
