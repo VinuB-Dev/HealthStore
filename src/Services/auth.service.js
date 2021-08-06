@@ -1,22 +1,22 @@
-import axios from "axios";
+import axios from 'axios'
 
 export async function signup({ name, email, password }) {
   try {
     const response = await axios.post(
-      "https://HealthStore.bravesoldier.repl.co/auth/signup",
+      'https://HealthStore.bravesoldier.repl.co/auth/signup',
       {
         name: name,
         email: email,
-        password: password
+        password: password,
       }
-    );
-    return response.data;
-  } catch (error) {
-    if (axios.isAxiosError(error)) {
-      const serverError = error;
-      if (serverError && serverError.response) {
-        return serverError.response.data;
-      }
+    )
+    return response.data
+  } catch (err) {
+    return {
+      success: false,
+      error: {
+        message: err,
+      },
     }
   }
 }
@@ -24,19 +24,19 @@ export async function signup({ name, email, password }) {
 export async function login({ email, password }) {
   try {
     const response = await axios.post(
-      "https://HealthStore.bravesoldier.repl.co/auth/login",
+      'https://HealthStore.bravesoldier.repl.co/auth/login',
       {
         email: email,
-        password: password
+        password: password,
       }
-    );
-    return response.data;
+    )
+    return response.data
   } catch (err) {
     return {
       success: false,
       error: {
-        message: err
-      }
-    };
+        message: err,
+      },
+    }
   }
 }
