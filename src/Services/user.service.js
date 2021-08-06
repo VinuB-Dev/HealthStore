@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const token = JSON.parse(localStorage.getItem('Auth'))?.token
+import { getToken } from '../Utils'
 
 export async function getUserData() {
   try {
@@ -8,7 +8,7 @@ export async function getUserData() {
       'https://HealthStore.bravesoldier.repl.co/user',
       {
         headers: {
-          Authorization: token,
+          Authorization: getToken(),
         },
       }
     )
@@ -16,7 +16,6 @@ export async function getUserData() {
     return response.data
   } catch (error) {
     console.log('fail-getuser')
-
     if (axios.isAxiosError(error)) {
       const serverError = error
       if (serverError && serverError.response) {
@@ -38,7 +37,7 @@ export async function wishlistAdd(productId) {
       },
       {
         headers: {
-          Authorization: token,
+          Authorization: getToken(),
         },
       }
     )
@@ -65,7 +64,7 @@ export async function wishlistRemove(productId) {
       },
       {
         headers: {
-          Authorization: token,
+          Authorization: getToken(),
         },
       }
     )
@@ -92,7 +91,7 @@ export async function cartAdd(productId) {
       },
       {
         headers: {
-          Authorization: token,
+          Authorization: getToken(),
         },
       }
     )
@@ -119,7 +118,7 @@ export async function cartRemove(productId) {
       },
       {
         headers: {
-          Authorization: token,
+          Authorization: getToken(),
         },
       }
     )
@@ -146,7 +145,7 @@ export async function incrementQuantity(productId) {
       },
       {
         headers: {
-          Authorization: token,
+          Authorization: getToken(),
         },
       }
     )
@@ -173,7 +172,7 @@ export async function decrementQuantity(productId) {
       },
       {
         headers: {
-          Authorization: token,
+          Authorization: getToken(),
         },
       }
     )

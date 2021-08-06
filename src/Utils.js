@@ -10,3 +10,7 @@ export const addTokenToStorage = (token) => {
     JSON.stringify({ isLoggedIn: true, token: token })
   )
 }
+
+export const getToken = () => {
+  return JSON.parse(localStorage.getItem('Auth'))?.token
+}
