@@ -1,11 +1,18 @@
-const updateUserLogin = (state, action) => {
-  if (!action.isLoggedIn) {
+const updateUserLogin = (state, payload) => {
+  if (!payload.isLoggedIn) {
     localStorage.removeItem('Auth')
+    return {
+      ...state,
+      _id: '',
+      isLoggedIn: false,
+      wishlist: [],
+      cart: [],
+    }
   }
   return {
     ...state,
-    isLoggedIn: action.isLoggedIn,
-    name: action.isLoggedIn ? action.name : '',
+    isLoggedIn: payload.isLoggedIn,
+    name: payload.isLoggedIn ? payload.name : '',
   }
 }
 

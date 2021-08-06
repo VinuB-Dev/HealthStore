@@ -16,6 +16,7 @@ export default function Product(value) {
     userDispatch,
   } = useUser()
   const navigate = useNavigate()
+
   const wishlistHandler = async (product) => {
     if (!isLoggedIn) {
       navigate('/login')

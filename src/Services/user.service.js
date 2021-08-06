@@ -12,16 +12,13 @@ export async function getUserData() {
         },
       }
     )
-    console.log('success-getuser')
     return response.data
   } catch (error) {
-    console.log('fail-getuser')
     if (axios.isAxiosError(error)) {
-      const serverError = error
-      if (serverError && serverError.response) {
+      if (error?.response) {
         return {
-          ...serverError.response.data,
-          status: serverError.response.status,
+          ...error.response.data,
+          status: error.response.status,
         }
       }
     }
@@ -44,11 +41,10 @@ export async function wishlistAdd(productId) {
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const serverError = error
-      if (serverError && serverError.response) {
+      if (error?.response) {
         return {
-          ...serverError.response.data,
-          status: serverError.response.status,
+          ...error.response.data,
+          status: error.response.status,
         }
       }
     }
@@ -71,11 +67,10 @@ export async function wishlistRemove(productId) {
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const serverError = error
-      if (serverError && serverError.response) {
+      if (error?.response) {
         return {
-          ...serverError.response.data,
-          status: serverError.response.status,
+          ...error.response.data,
+          status: error.response.status,
         }
       }
     }
@@ -98,11 +93,10 @@ export async function cartAdd(productId) {
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const serverError = error
-      if (serverError && serverError.response) {
+      if (error?.response) {
         return {
-          ...serverError.response.data,
-          status: serverError.response.status,
+          ...error.response.data,
+          status: error.response.status,
         }
       }
     }
@@ -125,11 +119,10 @@ export async function cartRemove(productId) {
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const serverError = error
-      if (serverError && serverError.response) {
+      if (error?.response) {
         return {
-          ...serverError.response.data,
-          status: serverError.response.status,
+          ...error.response.data,
+          status: error.response.status,
         }
       }
     }
@@ -152,11 +145,10 @@ export async function incrementQuantity(productId) {
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const serverError = error
-      if (serverError && serverError.response) {
+      if (error?.response) {
         return {
-          ...serverError.response.data,
-          status: serverError.response.status,
+          ...error.response.data,
+          status: error.response.status,
         }
       }
     }
@@ -179,11 +171,10 @@ export async function decrementQuantity(productId) {
     return response.data
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      const serverError = error
-      if (serverError && serverError.response) {
+      if (error?.response) {
         return {
-          ...serverError.response.data,
-          status: serverError.response.status,
+          ...error.response.data,
+          status: error.response.status,
         }
       }
     }
