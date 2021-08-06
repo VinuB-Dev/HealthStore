@@ -20,7 +20,7 @@ export default function Home() {
   useEffect(() => {
     const timer = setInterval(() => {
       img_index = changeImgIndex(img_index)
-    }, 5000)
+    }, 3000)
 
     return () => {
       clearInterval(timer)

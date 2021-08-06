@@ -14,14 +14,7 @@ export async function getUserData() {
     )
     return response.data
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error?.response) {
-        return {
-          ...error.response.data,
-          status: error.response.status,
-        }
-      }
-    }
+    console.log(error)
   }
 }
 
@@ -40,14 +33,7 @@ export async function wishlistAdd(productId) {
     )
     return response.data
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error?.response) {
-        return {
-          ...error.response.data,
-          status: error.response.status,
-        }
-      }
-    }
+    console.log(error)
   }
 }
 
@@ -66,14 +52,7 @@ export async function wishlistRemove(productId) {
     )
     return response.data
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error?.response) {
-        return {
-          ...error.response.data,
-          status: error.response.status,
-        }
-      }
-    }
+    console.log(error)
   }
 }
 
@@ -92,14 +71,7 @@ export async function cartAdd(productId) {
     )
     return response.data
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error?.response) {
-        return {
-          ...error.response.data,
-          status: error.response.status,
-        }
-      }
-    }
+    console.log(error)
   }
 }
 
@@ -118,14 +90,7 @@ export async function cartRemove(productId) {
     )
     return response.data
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error?.response) {
-        return {
-          ...error.response.data,
-          status: error.response.status,
-        }
-      }
-    }
+    console.log(error)
   }
 }
 
@@ -144,14 +109,7 @@ export async function incrementQuantity(productId) {
     )
     return response.data
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error?.response) {
-        return {
-          ...error.response.data,
-          status: error.response.status,
-        }
-      }
-    }
+    console.log(error)
   }
 }
 
@@ -170,13 +128,6 @@ export async function decrementQuantity(productId) {
     )
     return response.data
   } catch (error) {
-    if (axios.isAxiosError(error)) {
-      if (error?.response) {
-        return {
-          ...error.response.data,
-          status: error.response.status,
-        }
-      }
-    }
+    console.log(error)
   }
 }

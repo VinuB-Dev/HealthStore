@@ -47,7 +47,8 @@
   padding: 1rem;
   border-radius: 3rem;
   border: none;
-  background-color: #34d399;
-  color: black;
-  font-weight: 500;
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  font-weight: bolder;
+  cursor: pointer;
 }

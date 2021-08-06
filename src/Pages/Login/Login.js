@@ -17,8 +17,10 @@ export default function Login() {
   })
   const [error, setError] = useState(0)
   const { userDispatch } = useUser()
+  const [loading, setLoading] = useState(0)
 
   const submit = async (e) => {
+    setLoading(1)
     e.preventDefault()
     const response = await login({
       email: userData['email'],
@@ -33,9 +35,11 @@ export default function Login() {
           name: response.name,
         },
       })
+      setLoading(0)
       navigate(from || '/')
     } else {
       setError(1)
+      setLoading(0)
     }
   }
 
@@ -48,49 +52,55 @@ export default function Login() {
 
   return (
     <div className='auth-container'>
-      <form className='auth-form' onSubmit={submit}>
-        <div>
-          {console.log(error)}
-          {error ? (
-            <div style={{ marginLeft: '2.5rem' }}>
-              <h3 style={{ color: 'red' }}>Username/Password wrong</h3>
-              <h3 style={{ color: 'green' }}>Signup if you haven't yet</h3>
-            </div>
-          ) : (
-            ''
-          )}
+      {loading === 1 ? (
+        <div className='spinner'>
+          <div></div>
+          <div></div>
         </div>
-        <h3>Login</h3>
-        <label>Email</label>
-        <input
-          id='email'
-          type='email'
-          value={userData.email}
-          required
-          placeholder='Enter Email'
-          autoComplete='off'
-          onChange={onChangeHandler}
-        />
-        <label>Password</label>
-        <input
-          id='password'
-          value={userData.password}
-          type='password'
-          required
-          placeholder='Enter Password'
-          onChange={onChangeHandler}
-        />
-        <button type='submit' className='link_btn'>
-          <RiLoginBoxFill />
-          Login
-        </button>
-        <div className='signup'>
-          Not a user?{' '}
-          <Link to='/signup' className='primary_link'>
-            Signup
-          </Link>
-        </div>
-      </form>
+      ) : (
+        <form className='auth-form' onSubmit={submit}>
+          <div>
+            {error ? (
+              <div style={{ marginLeft: '2.5rem' }}>
+                <h3 style={{ color: 'red' }}>Username/Password wrong</h3>
+                <h3 style={{ color: 'green' }}>Signup if you haven't yet</h3>
+              </div>
+            ) : (
+              ''
+            )}
+          </div>
+          <h3>Login</h3>
+          <label>Email</label>
+          <input
+            id='email'
+            type='email'
+            value={userData.email}
+            required
+            placeholder='Enter Email'
+            autoComplete='off'
+            onChange={onChangeHandler}
+          />
+          <label>Password</label>
+          <input
+            id='password'
+            value={userData.password}
+            type='password'
+            required
+            placeholder='Enter Password'
+            onChange={onChangeHandler}
+          />
+          <button type='submit' className='link_btn'>
+            <RiLoginBoxFill />
+            Login
+          </button>
+          <div className='signup'>
+            Not a user?{' '}
+            <Link to='/signup' className='primary_link'>
+              Signup
+            </Link>
+          </div>
+        </form>
+      )}
     </div>
   )
 }
