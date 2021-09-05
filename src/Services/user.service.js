@@ -94,6 +94,25 @@ export async function cartRemove(productId) {
   }
 }
 
+export async function clearCart() {
+  try {
+    const response = await axios.post(
+      'https://HealthStore.bravesoldier.repl.co/user/cartclear',
+      {
+        nothing: 'nothing',
+      },
+      {
+        headers: {
+          Authorization: getToken(),
+        },
+      }
+    )
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export async function incrementQuantity(productId) {
   try {
     const response = await axios.post(

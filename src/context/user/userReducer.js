@@ -75,6 +75,12 @@ export default function userReducer(state, action) {
         cart: state.cart.concat(action.payload),
       }
 
+    case 'CLEAR_CART':
+      return {
+        ...state,
+        cart: [],
+      }
+
     case 'INCREASE_QUANTITY':
       return {
         ...state,

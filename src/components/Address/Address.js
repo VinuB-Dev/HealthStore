@@ -7,6 +7,7 @@ import { AiFillDelete } from 'react-icons/ai'
 import { useNavigate } from 'react-router'
 import {
   addAddress,
+  clearCart,
   deleteAddress,
   getOrderId,
   updateAddress,
@@ -37,6 +38,7 @@ async function ShowRazorpay(amount, payment, dismiss) {
   }
   const response = await getOrderId(amount * 100)
   let data = response.data
+  console.log(data)
 
   const options = {
     key: 'rzp_test_D140ET0Eed3Fyf',
@@ -70,7 +72,10 @@ export default function Address() {
   const error_toast = () =>
     toast('Transaction failed! Please click on order now to order')
 
-  function payment(response) {
+  const payment = async (response) => {
+    userDispatch({ type: 'CLEAR_CART', payload: '' })
+    const respo = await clearCart()
+    console.log(respo)
     notify()
     if (response) setTimeout(() => navigate('/'), 3000)
   }
@@ -188,23 +193,6 @@ export default function Address() {
       </div>
     )
   }
-
-  // const addresses = [
-  //   {
-  //     address: 'flat number 207, kalkura Krsna,kalsanka',
-  //     city: 'udupi',
-  //     state: 'karnataka',
-  //     pincode: '576102',
-  //     phone: '8660756432',
-  //   },
-  //   {
-  //     address: 'flat number 207, kalkura Krsna,kalsanka',
-  //     city: 'udupi',
-  //     state: 'karnataka',
-  //     pincode: '576102',
-  //     phone: '8660756433',
-  //   },
-  // ]
 
   function EditModal({ location }) {
     const [modal, showModal] = useState(0)
