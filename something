@@ -1,0 +1,183 @@
+import './Address.css'
+import { useState } from 'react'
+import styles from '../Modal/Modal.module.css'
+
+import { AiOutlineEdit } from 'react-icons/ai'
+import { AiFillDelete } from 'react-icons/ai'
+
+export default function Address() {
+  const [modal, showModal] = useState(0)
+  const addresses = [
+    {
+      address: 'flat number 207, kalkura Krsna,kalsanka',
+      city: 'udupi',
+      state: 'karnataka',
+      pincode: '576102',
+      phone: '8660756432',
+    },
+    {
+      address: 'flat number 207, kalkura Krsna,kalsanka',
+      city: 'udupi',
+      state: 'karnataka',
+      pincode: '576102',
+      phone: '8660756433',
+    },
+  ]
+  const [current_address, setAddress] = useState({
+    _id: addresses.length + 1,
+    address: '',
+    city: '',
+    state: '',
+    phone: '',
+    pincode: '',
+  })
+
+  function Modal() {
+    function submit(e) {
+      const fileList = e.target.value
+      setText(fileList)
+    }
+
+    function onChangeHandler(e) {
+      setAddress({
+        ...current_address,
+        [e.currentTarget.id]: JSON.parse(JSON.stringify(e.currentTarget.value)),
+      })
+    }
+
+    return (
+      <div>
+        <div
+          class={styles.modalBtnClick}
+          onClick={() => {
+            showModal(!modal)
+          }}
+        >
+          Add address
+        </div>
+        <div
+          class={styles.modalOverlay}
+          style={{ display: modal ? 'block' : 'none' }}
+          onClick={() => showModal(!modal)}
+        ></div>
+        <div
+          className={styles.modalDesktop}
+          style={{ display: modal ? 'block' : 'none' }}
+        >
+          <form
+            className='auth-form'
+            style={{ borderTop: '1px solid' }}
+            onSubmit={submit}
+          >
+            <div></div>
+            <h3>{current_address.address ? 'Edit Address' : 'Add Address'}</h3>
+            <label>Address</label>
+            <input
+              id='address'
+              type='text'
+              value={current_address.address}
+              required
+              placeholder='Enter address'
+              autoComplete='off'
+              onChange={onChangeHandler}
+            />
+            <label>City</label>
+            <input
+              id='city'
+              value={current_address.city}
+              type='text'
+              required
+              placeholder='enter city'
+              onChange={onChangeHandler}
+            />
+            <label>State</label>
+            <input
+              id='state'
+              value={current_address.state}
+              type='text'
+              required
+              placeholder='enter state'
+              onChange={onChangeHandler}
+            />
+            <label>Pincode</label>
+            <input
+              id='pincode'
+              type='number'
+              required
+              placeholder='Enter pincode'
+              value={current_address.pincode}
+              onChange={onChangeHandler}
+            />
+            <label>Phone number</label>
+            <input
+              id='phone'
+              type='tel'
+              required
+              placeholder='Enter Phone number'
+              value={current_address.phone}
+              onChange={onChangeHandler}
+            />
+            {current_address.address ? (
+              <button className='link_btn'>Edit address</button>
+            ) : (
+              <button className='link_btn'>Add address</button>
+            )}
+            <button
+              type='submit'
+              className='link_btn'
+              style={{ display: 'none' }}
+            >
+              Add address
+            </button>
+          </form>
+        </div>
+      </div>
+    )
+  }
+
+  function editForm(address) {
+    showModal(1)
+    setAddress(address)
+  }
+
+  return (
+    <div>
+      <Modal showcase='Add address' />
+      {addresses.map((address) => {
+        return (
+          <div
+            style={{
+              margin: '1rem auto',
+              width: 'fit-content',
+              display: 'flex',
+              gap: '1rem',
+              border: '2px solid',
+              padding: '1rem',
+            }}
+          >
+            <input type='radio' />
+            <div
+              style={{
+                textAlign: 'left',
+              }}
+            >
+              <div>{address.address}</div>
+              <div>{address.city}</div>
+              <div>{address.state}</div>
+              <div>{address.pincode}</div>
+            </div>
+            <div
+              style={{ cursor: 'pointer' }}
+              onClick={() => editForm(address)}
+            >
+              <AiOutlineEdit />
+            </div>
+            <div style={{ cursor: 'pointer' }}>
+              <AiFillDelete />
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}

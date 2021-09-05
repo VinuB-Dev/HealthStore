@@ -5,7 +5,49 @@ import {
   incrementQuantity,
   decrementQuantity,
   cartRemove,
+  getOrderId,
 } from '../../Services/user.service'
+import Address from '../Address/Address'
+
+function loadScript(src) {
+  return new Promise((resolve) => {
+    const script = document.createElement('script')
+    script.src = src
+    script.onload = () => {
+      resolve(true)
+    }
+    script.onerror = () => {
+      resolve(false)
+    }
+    document.body.appendChild(script)
+  })
+}
+
+async function ShowRazorpay(amount) {
+  const res = await loadScript('https://checkout.razorpay.com/v1/checkout.js')
+
+  if (!res) {
+    alert('Razorpay SDK failed to load')
+    return
+  }
+  const response = await getOrderId(amount * 100)
+  let data = response.data
+
+  const options = {
+    key: 'rzp_test_D140ET0Eed3Fyf',
+    currency: 'INR',
+    amount: data.amount.toString() * 100,
+    order_id: data.id,
+    name: 'HealthStore order',
+    description: 'Thank you for ordering. Please pay the amount',
+    callback_url: 'https://health-store.netlify.app/',
+    theme: {
+      color: '#3399cc',
+    },
+  }
+  const paymentObject = new window.Razorpay(options)
+  paymentObject.open()
+}
 
 const ShowItem = () => {
   const {
@@ -89,6 +131,7 @@ const ShowItem = () => {
 const CartCard = () => {
   const {
     userState: { cart },
+    userDispatch,
   } = useUser()
   const { TotalPrice, FinalPrice, discount } = addCost(cart)
   return (
@@ -107,7 +150,14 @@ const CartCard = () => {
         </div>
       </div>
       <div className='button-flex'>
-        <button className='cart_btn-yellow product-desc'>Order Now</button>
+        <button
+          className='cart_btn-yellow product-desc'
+          onClick={() =>
+            userDispatch({ type: 'UPDATE_PRICE', payload: FinalPrice })
+          }
+        >
+          <Link to='/address'> Checkout</Link>
+        </button>
       </div>
     </div>
   )
@@ -137,7 +187,7 @@ export default function Cart() {
             <div className='allItems'>
               <ShowItem />
             </div>
-            <div div className='allItems'>
+            <div className='allItems'>
               <CartCard value={cart} />
             </div>
           </div>

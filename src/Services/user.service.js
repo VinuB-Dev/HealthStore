@@ -131,3 +131,79 @@ export async function decrementQuantity(productId) {
     console.log(error)
   }
 }
+
+export async function getOrderId(amount) {
+  try {
+    const response = await axios.post(
+      'https://HealthStore.bravesoldier.repl.co/order',
+      {
+        amount: amount,
+      },
+      {
+        headers: {
+          Authorization: getToken(),
+        },
+      }
+    )
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function addAddress(address) {
+  try {
+    const response = await axios.post(
+      'https://HealthStore.bravesoldier.repl.co/user/address',
+      {
+        address: address,
+      },
+      {
+        headers: {
+          Authorization: getToken(),
+        },
+      }
+    )
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function deleteAddress(address) {
+  try {
+    const response = await axios.post(
+      'https://HealthStore.bravesoldier.repl.co/user/removeAddress',
+      {
+        addressid: address._id,
+      },
+      {
+        headers: {
+          Authorization: getToken(),
+        },
+      }
+    )
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export async function updateAddress(address) {
+  try {
+    const response = await axios.post(
+      'https://HealthStore.bravesoldier.repl.co/user/updateAddress',
+      {
+        address: address,
+      },
+      {
+        headers: {
+          Authorization: getToken(),
+        },
+      }
+    )
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+}

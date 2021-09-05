@@ -7,6 +7,8 @@ const updateUserLogin = (state, payload) => {
       isLoggedIn: false,
       wishlist: [],
       cart: [],
+      address: [],
+      finalPrice: 0,
     }
   }
   return {
@@ -17,6 +19,7 @@ const updateUserLogin = (state, payload) => {
 }
 
 const loadUserData = (state, { user }) => {
+  console.log(user)
   return { ...state, ...user }
 }
 
@@ -93,6 +96,38 @@ export default function userReducer(state, action) {
             ? { ...item, quantityInCart: item.quantityInCart - 1 }
             : item
         }),
+      }
+    case 'ADD_ADDRESS':
+      return {
+        ...state,
+        address: state.address.concat(action.payload),
+      }
+    case 'UPDATE_ADDRESS':
+      console.log('coming')
+      return {
+        ...state,
+        address: state.address.map((loc) => {
+          return loc._id === action.payload._id
+            ? {
+                ...loc,
+                address: action.payload.address,
+                city: action.payload.city,
+                state: action.payload.state,
+                pincode: action.payload.pincode,
+                phone: action.payload.phone,
+              }
+            : loc
+        }),
+      }
+    case 'REMOVE_ADDRESS':
+      return {
+        ...state,
+        address: state.address.filter((loc) => loc._id !== action.payload._id),
+      }
+    case 'UPDATE_PRICE':
+      return {
+        ...state,
+        finalPrice: action.payload,
       }
     default:
       return state

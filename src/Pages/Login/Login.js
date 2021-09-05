@@ -93,6 +93,20 @@ export default function Login() {
             <RiLoginBoxFill />
             Login
           </button>
+          <button
+            type='submit'
+            className='link_btn'
+            style={{ marginTop: '1rem' }}
+            onClick={() =>
+              setUserData({
+                email: 'test@gmail.com',
+                password: 'test',
+              })
+            }
+          >
+            <RiLoginBoxFill />
+            Login as guest
+          </button>
           <div className='signup'>
             Not a user?{' '}
             <Link to='/signup' className='primary_link'>

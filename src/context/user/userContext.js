@@ -12,6 +12,8 @@ export function UserProvider({ children }) {
     name: '',
     wishlist: [],
     cart: [],
+    address: [],
+    finalPrice: 0,
   })
 
   useEffect(() => {
