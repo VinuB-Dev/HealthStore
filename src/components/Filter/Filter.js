@@ -1,7 +1,7 @@
 import "./Filter_module.css";
 import { useState } from "react";
 import { FcFilledFilter } from "react-icons/fc";
-import { useCart } from "../../context/dataContext";
+import { useCart } from "../../context/data/dataContext";
 
 export default function Filter() {
   const { dispatch } = useCart();

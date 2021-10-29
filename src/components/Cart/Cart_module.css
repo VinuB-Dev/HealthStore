@@ -180,7 +180,7 @@
 .making-grids {
   margin-left: 8rem;
   display: grid;
-  grid-template: "products products checkout";
+  grid-template: 'products products checkout';
   grid-column-gap: 1rem;
 }
 
@@ -192,7 +192,8 @@
 
 @media (max-width: 640px) {
   .making-grids {
-    display: block;
+    display: flex;
+    flex-direction: column-reverse;
     margin-left: 0;
   }
   .allItems {

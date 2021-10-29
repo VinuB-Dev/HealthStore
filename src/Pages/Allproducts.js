@@ -1,7 +1,7 @@
 import "../styles.css";
 import Filter from "../components/Filter/Filter";
 import Product from "../components/Product/Product";
-import { useCart } from "../context/dataContext";
+import { useCart } from "../context/data/dataContext";
 
 export default function AllProducts() {
   const { filteredData } = useCart();
